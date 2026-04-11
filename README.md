@@ -12,21 +12,21 @@ This is the student version of the project. Students are expected to complete sp
 
 Focus your work on these files:
 
-- `buffer_pool_manager.py`
-- `replacement.py` 
-- `bplustree.py` (core logic improvements)
+- `./src/buffer_pool_manager.py`
+- `./src/replacement.py` 
+- `./src/bplustree.py` (core logic improvements)
 
 ## 3. Files You MUST NOT Modify
 
 Do not modify these files:
 
-- `disk_manager.py`
-- `models.py`
-- `simulator.py`
-- `benchmark.py`
-- `plot_results.py`
+- `./src/disk_manager.py`
+- `./src/models.py`
+- `./src/simulator.py`
+- `./src/benchmark.py`
+- `./src/plot_results.py`
 
-`simulator.py` is fully implemented by the instructor and is part of the grading pipeline. Modifying it may break evaluation.
+`./src/simulator.py` is fully implemented by the instructor and is part of the grading pipeline. Modifying it may break evaluation.
 
 ## 4. Understanding Code Markers
 
@@ -43,24 +43,24 @@ Do not modify these files:
 ## 5. How to Run the Project
 
 ```bash
-python -m student_starter.src.main
+python -m src.main
 ```
 
 ## 6. How to Run Tests
 
 ```bash
-pytest student_starter/tests/
+pytest ./tests/
 ```
 
 The public test suite is shared with the instructor reference. Before the TODO
 sections are implemented, it is expected that tests covering replacement
 policies, buffer pool behavior, B+ tree behavior, integration, and benchmark
-execution will fail in `student_starter`.
+execution will fail in `DBMS_Project`.
 
 ## 7. How to Run Benchmarks
 
 ```bash
-python -m student_starter.src.benchmark
+python -m src.benchmark
 ```
 
 The benchmark script runs the instructor-provided simulation pipeline across small workload and buffer-size sweeps.
