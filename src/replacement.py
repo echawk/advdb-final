@@ -77,7 +77,11 @@ class LRUReplacer(Replacer):
         # [STUDENT TODO] Walk the LRU order from oldest to newest and return
         # the first evictable frame. Remove it from the policy state before
         # returning.
-        raise NotImplementedError("Students should implement LRUReplacer.evict.")
+        if not self._order:
+            return None
+
+        frame_id, _ = self._order.popitem(last=False)
+        return frame_id
 
     def remove(self, frame_id: int) -> None:
         self._order.pop(frame_id, None)
@@ -112,7 +116,23 @@ class ClockReplacer(Replacer):
     def evict(self) -> int | None:
         # [STUDENT TODO] Advance the clock hand, skip non-evictable frames,
         # clear reference bits on the first pass, and evict on the second.
-        raise NotImplementedError("Students should implement ClockReplacer.evict.")
+        if not any(self.evictable):
+            return None
+
+        while True:
+            frame_id = self.clock_hand
+            self.clock_hand = (self.clock_hand + 1) % self.pool_size
+
+            if not self.evictable[frame_id]:
+                continue
+
+            if self.reference_bits[frame_id] == 1:
+                self.reference_bits[frame_id] = 0
+                continue
+
+            self.evictable[frame_id] = False
+            self.reference_bits[frame_id] = 0
+            return frame_id
 
     def remove(self, frame_id: int) -> None:
         self.evictable[frame_id] = False
